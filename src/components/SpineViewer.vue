@@ -24,6 +24,7 @@
 import { ref, watch, onMounted } from 'vue'
 import { useCharacterStore } from '@/stores/characterStore'
 import { SpinePlayer, Vector2, CameraController, OrthoCamera, GLTexture } from '@esotericsoftware/spine-player'
+import JSZip from 'jszip'
 
 import type { Animation } from '@esotericsoftware/spine-player'
 import type { SpinePlayerInternal } from '@/types/spine-player-internal'
@@ -39,6 +40,7 @@ const emit = defineEmits(['animations', 'skins'])
 let player: SpinePlayer | null = null
 let recorder: MediaRecorder | null = null
 let cancelExport = false
+let exportingFrames = false
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 let cameraCtrl: CameraController | null = null
 let manualCamera: OrthoCamera | null = null
@@ -201,6 +203,9 @@ watch(() => store.selectedCharacterId, () => {
     cancelExport = true
     recorder.stop()
   }
+  if (exportingFrames) {
+    cancelExport = true
+  }
   store.animationCategory = 'character';
   void load()
 })
@@ -209,12 +214,18 @@ watch(() => store.animationCategory, () => {
     cancelExport = true
     recorder.stop()
   }
+  if (exportingFrames) {
+    cancelExport = true
+  }
   void load()
 })
 watch(() => store.selectedAnimation, anim => {
   if (recorder && recorder.state === 'recording') {
     cancelExport = true
     recorder.stop()
+  }
+  if (exportingFrames) {
+    cancelExport = true
   }
   progress.value = 0
   if (player && anim) {
@@ -257,6 +268,9 @@ watch(() => store.showDatingBg, () => {
   if (recorder && recorder.state === 'recording') {
     cancelExport = true
     recorder.stop()
+  }
+  if (exportingFrames) {
+    cancelExport = true
   }
   void load()
 })
@@ -448,7 +462,123 @@ function exportAnimation(transparent: boolean): Promise<void> {
   })
 }
 
-defineExpose({ resetCamera, saveScreenshot, exportAnimation })
+function exportAnimationFrames(transparent: boolean): Promise<void> {
+  const p = player
+  const cam = manualCamera
+  if (!p || !cam) return Promise.resolve()
+
+  cancelExport = false
+  exportingFrames = true
+
+  const canvas = p.canvas!
+  const animationName = store.selectedAnimation
+  const fps = 60
+  const bgColor = (p as unknown as SpinePlayerInternal).config.backgroundColor as string
+
+  return new Promise(resolve => {
+    if (transparent) {
+      (p as unknown as SpinePlayerInternal).bg.setFromString('00000000')
+    }
+
+    const prevPos = new Vector2(cam.position.x, cam.position.y)
+    const prevZoom = cam.zoom
+
+    if (!store.useCurrentCamera) {
+      cam.position.x = defaultCameraPos.x
+      cam.position.y = defaultCameraPos.y
+      const paddedWidth = size.x
+      const paddedHeight = size.y + 100
+      cam.zoom = Math.max(
+        paddedWidth / canvas.width,
+        paddedHeight / canvas.height,
+      )
+      cam.update()
+    }
+
+    const animName = store.selectedAnimation
+    let duration = 3
+    if (animName && p.animationState) {
+      const anim = p.animationState.data.skeletonData.animations.find(
+        (a: Animation) => a.name === animName,
+      )
+      if (anim) duration = anim.duration
+      p.setAnimation(animName, false)
+      p.animationState?.apply(p.skeleton!)
+      p.skeleton!.updateWorldTransform()
+    }
+
+    const speed = p.speed || store.animationSpeed || 1
+    const totalFrames = Math.ceil((duration / speed) * fps)
+    const zip = new JSZip()
+    const wasPlaying = store.playing
+    p.pause()
+    store.playing = false
+
+    let frame = 0
+    const capture = () => {
+      if (cancelExport) {
+        exportingFrames = false
+        if (transparent) {
+          ;(p as unknown as SpinePlayerInternal).bg.setFromString(bgColor)
+        }
+        if (!store.useCurrentCamera) {
+          cam.position.x = prevPos.x
+          cam.position.y = prevPos.y
+          cam.zoom = prevZoom
+          cam.update()
+        }
+        cancelExport = false
+        resolve()
+        return
+      }
+
+      ;(p as unknown as SpinePlayerInternal).drawFrame(false)
+      const url = canvas.toDataURL('image/png')
+      zip.file(`frame_${String(frame).padStart(4, '0')}.png`, url.split(',')[1], { base64: true })
+      frame++
+      if (frame < totalFrames) {
+        p.animationState?.update((1 / fps) * speed)
+        p.animationState?.apply(p.skeleton!)
+        p.skeleton!.updateWorldTransform()
+        requestAnimationFrame(capture)
+      } else {
+        exportingFrames = false
+        if (transparent) {
+          ;(p as unknown as SpinePlayerInternal).bg.setFromString(bgColor)
+        }
+        if (!store.useCurrentCamera) {
+          cam.position.x = prevPos.x
+          cam.position.y = prevPos.y
+          cam.zoom = prevZoom
+          cam.update()
+        }
+        p.setAnimation(animName, true)
+        p.animationState?.apply(p.skeleton!)
+        p.skeleton!.updateWorldTransform()
+        if (wasPlaying) {
+          p.play()
+          store.playing = true
+        } else {
+          p.pause()
+          store.playing = false
+        }
+        zip.generateAsync({ type: 'blob' }).then((blob: Blob) => {
+          const url = URL.createObjectURL(blob)
+          const a = document.createElement('a')
+          a.href = url
+          a.download = `animation_${store.selectedCharacterId}_${animationName}_frames.zip`
+          a.click()
+          URL.revokeObjectURL(url)
+          cancelExport = false
+          resolve()
+        })
+      }
+    }
+    capture()
+  })
+}
+
+defineExpose({ resetCamera, saveScreenshot, exportAnimation, exportAnimationFrames })
 </script>
 
 <style scoped>

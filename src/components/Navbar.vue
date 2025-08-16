@@ -127,8 +127,8 @@ const mobileMenu = ref<HTMLElement | null>(null);
 const showMobileKofiTip = ref(false);
 const mobileKofiTipHidden = ref(false);
 
-let mobileTipTimer: ReturnType<typeof setTimeout> | undefined;
-let mobileTipHideTimer: ReturnType<typeof setTimeout> | undefined;
+let mobileTipTimer: number | undefined;
+let mobileTipHideTimer: number | undefined;
 
 const openMobileMenu = () => {
   mobileMenuOpen.value = true;

@@ -1,5 +1,13 @@
 export default [
   {
+    "date": "16/08/2025",
+    "changes": [
+      "Fixed scrollbar style in the changelog modal.",
+      "Added an option to be able to export animations frame by frame.",
+      "Allow smaller screen sizes to export animations."
+    ]
+  },
+  {
     "date": "14/08/2025",
     "changes": [
       "Added ko-fi page to receive donations.",
@@ -7,7 +15,7 @@ export default [
       "Added new character icons.",
       "Added Rubia: Maid Bikini, Sylvia: Bikini Agent and Teresse: Milky Bikini standing animations.",
       "Added Sylvia: Bikini Agent and Teresse: Milky Bikini ultimate animations.",
-      "Added Sylvia: Bikini Agent and Teresse: Milky Bikini fated guest animations. "
+      "Added Sylvia: Bikini Agent and Teresse: Milky Bikini fated guest animations."
     ]
   },
   {

@@ -147,11 +147,15 @@ function onScreenshot(value: boolean) {
   isScreenshotting.value = false
 }
 
-async function onExportAnimation(value: boolean) {
+async function onExportAnimation({ format, transparent }: { format: 'video' | 'frames'; transparent: boolean }) {
   if (!viewerRef.value) return
   showMobileControls.value = false
   isExporting.value = true
-  await viewerRef.value.exportAnimation(value)
+  if (format === 'frames') {
+    await viewerRef.value.exportAnimationFrames(transparent)
+  } else {
+    await viewerRef.value.exportAnimation(transparent)
+  }
   isExporting.value = false
 }
 

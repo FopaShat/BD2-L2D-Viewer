@@ -86,15 +86,59 @@
           <span>Transparent<br />image/export</span>
         </label>
       </div>
-      <div class="p-2 hidden md:flex">
+      <div class="p-2 hidden md:flex relative" ref="desktopExportRef">
         <button
           class="flex-1 bg-gray-600 hover:bg-gray-500 text-white rounded shadow transition px-4 py-2"
-          @click="onExport"
+          @click="showExportMenu = !showExportMenu"
           :disabled="exporting"
         >
           <LoadingIcon v-if="exporting" />
           <span v-else>Export Animation</span>
         </button>
+        <div
+          v-if="showExportMenu"
+          class="absolute right-2 bottom-full mb-1 w-48 bg-gray-700 rounded shadow z-10"
+        >
+          <button
+            class="block w-full text-left px-4 py-2 hover:bg-gray-600"
+            @click="onExport('video')"
+          >
+            Export as WebM
+          </button>
+          <button
+            class="block w-full text-left px-4 py-2 hover:bg-gray-600"
+            @click="onExport('frames')"
+          >
+            Export as Frames (ZIP)
+          </button>
+        </div>
+      </div>
+      <div class="p-2 flex md:hidden relative" ref="mobileExportRef">
+        <button
+          class="flex-1 bg-gray-600 hover:bg-gray-500 text-white rounded shadow transition px-4 py-2"
+          @click="showExportMenu = !showExportMenu"
+          :disabled="exporting"
+        >
+          <LoadingIcon v-if="exporting" />
+          <span v-else>Export Animation</span>
+        </button>
+        <div
+          v-if="showExportMenu"
+          class="absolute right-2 top-full mt-1 w-48 bg-gray-700 rounded shadow z-10"
+        >
+          <button
+            class="block w-full text-left px-4 py-2 hover:bg-gray-600"
+            @click="onExport('video')"
+          >
+            Export as WebM
+          </button>
+          <button
+            class="block w-full text-left px-4 py-2 hover:bg-gray-600"
+            @click="onExport('frames')"
+          >
+            Export as Frames (ZIP)
+          </button>
+        </div>
       </div>
       <div class="p-2">
         <label class="flex items-center gap-1 text-sm whitespace-nowrap">
@@ -107,7 +151,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, toRefs, ref, watch } from 'vue'
+import { computed, toRefs, ref, watch, onMounted, onUnmounted } from 'vue'
 import { useCharacterStore } from '@/stores/characterStore'
 
 import LoadingIcon from '@/components/icons/LoadingIcon.vue';
@@ -118,6 +162,9 @@ const { animations, skins, exporting, screenshotting } = toRefs(props)
 const store = useCharacterStore()
 const colorInput = ref<HTMLInputElement | null>(null)
 const transparentBg = ref(false)
+const showExportMenu = ref(false)
+const desktopExportRef = ref<HTMLElement | null>(null)
+const mobileExportRef = ref<HTMLElement | null>(null)
 
 const emit = defineEmits(['select', 'reset-camera', 'screenshot', 'export-animation', 'category-change'])
 
@@ -135,8 +182,16 @@ function onScreenshot() {
   emit('screenshot', transparentBg.value)
 }
 
-function onExport() {
-  emit('export-animation', transparentBg.value)
+function onExport(format: 'video' | 'frames') {
+  emit('export-animation', { format, transparent: transparentBg.value })
+  showExportMenu.value = false
+}
+
+function handleClickOutside(e: MouseEvent) {
+  const target = e.target as Node
+  if (desktopExportRef.value?.contains(target) || mobileExportRef.value?.contains(target))
+    return
+  showExportMenu.value = false
 }
 
 const selectedAnimation = computed(() => store.selectedAnimation)
@@ -146,4 +201,7 @@ const currentChar = computed(() => store.characters.find(c => c.id === store.sel
 watch(() => store.animationCategory, () => {
   emit('category-change');
 });
+
+onMounted(() => document.addEventListener('click', handleClickOutside))
+onUnmounted(() => document.removeEventListener('click', handleClickOutside))
 </script>
