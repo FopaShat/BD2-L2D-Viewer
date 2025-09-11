@@ -1,5 +1,13 @@
 export default [
   {
+    "date": "11/09/2025",
+    "changes": [
+      "Added Sonya: Shadowed Dream character icon.",
+      "Added Sonya: Shadowed Dream standing animations.",
+      "Added Sonya: Shadowed Dream and Rafina: Code Name A ultimate animations."
+    ]
+  },
+  {
     "date": "04/09/2025",
     "changes": [
       "Added the 'Slap Slap Pop' minigame animations."

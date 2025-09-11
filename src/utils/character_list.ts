@@ -652,6 +652,13 @@ export default {
     "cutscene": "cutscene_char003802",
     "dating": ""
   },
+  "003901": {
+    "charName": "Sonya",
+    "costumeName": "Shadowed Dream",
+    "spine": "char003901",
+    "cutscene": "cutscene_char003901",
+    "dating": ""
+  },
   "020001": {
     "charName": "Eris",
     "costumeName": "Esteemed Adventurer",
@@ -803,7 +810,7 @@ export default {
     "charName": "Rafina",
     "costumeName": "Code Name A",
     "spine": "char060702",
-    "cutscene": "",
+    "cutscene": "cutscene_char060702",
     "dating": ""
   },
   "060706": {
