@@ -1,5 +1,13 @@
 export default [
   {
+    "date": "25/09/2025",
+    "changes": [
+      "Added Tyr: Starlight Guardian character icon.",
+      "Added Tyr: Starlight Guardian standing and ultimate animations.",
+      "I apologize for the delay in the update, I started school period and I only can update the website in the afternoon. If you enjoy what I do and want to help you can support me in my ko-fi page :)"
+    ]
+  },
+  {
     "date": "11/09/2025",
     "changes": [
       "Added Sonya: Shadowed Dream character icon.",

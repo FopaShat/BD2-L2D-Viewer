@@ -659,6 +659,13 @@ export default {
     "cutscene": "cutscene_char003901",
     "dating": ""
   },
+  "004101": {
+    "charName": "Tyr",
+    "costumeName": "Starlight Guardian",
+    "spine": "char004101",
+    "cutscene": "cutscene_char004101",
+    "dating": ""
+  },
   "020001": {
     "charName": "Eris",
     "costumeName": "Esteemed Adventurer",
