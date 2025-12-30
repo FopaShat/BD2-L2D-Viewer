@@ -274,6 +274,9 @@ function setSpineAnimation(
   if (selectedCharacterUsesDatingTracks.value) {
     state.clearTrack(0)
     state.clearTrack(1)
+
+    p.skeleton?.setToSetupPose()
+    p.skeleton?.updateWorldTransform()
   } else {
     state.clearTrack(1)
   }

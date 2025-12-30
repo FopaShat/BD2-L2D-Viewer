@@ -693,8 +693,10 @@ export default {
     "charName": "Tyr",
     "costumeName": "Innocent Bunny",
     "spine": "char004102",
-    "cutscene": "",
-    "dating": ""
+    "cutscene": "cutscene_char004102",
+    "dating": "illust_dating13",
+    "datingHasNoBg": false,
+    "datingUsesTracks": true
   },
   "020001": {
     "charName": "Eris",

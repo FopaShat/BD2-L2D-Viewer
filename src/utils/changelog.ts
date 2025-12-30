@@ -1,5 +1,14 @@
 export default [
   {
+    "date": "30/12/2025",
+    "changes": [
+      "Added Tyr: Innocent Bunny ultimate animation.",
+      "Added Tyr: Innocent Bunny fated guest animation.",
+      "Fixed the bug of fated guest animations displaying incorrect slots.",
+      "As always, if you like my work and want to support me so I can keep working on adding more features and improving the site you can do so by clicking in the coffee icon in the navigation bar."
+    ]
+  },
+  {
     "date": "17/12/2025",
     "changes": [
       "Added Darian: Bittersweet Bunny, Tyr: Innocent Bunny, Eleaneer: Shadow Bunny, Zenith: Stranger Bunny and Wilhelmina: Frozen Queen character icons.",
