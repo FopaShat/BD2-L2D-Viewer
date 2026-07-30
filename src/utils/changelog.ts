@@ -1,5 +1,16 @@
 export default [
   {
+    "date": "30/07/2026",
+    "changes": [
+      "Added Sylvia: Crimson Lotus, Helena: Sunny Inn Hand, Dalvi: Butterfly Dream, Yuri: Forever Mascot and Glacia: Heavenly Guardian Successor character icons.",
+      "Added Sylvia: Crimson Lotus, Helena: Sunny Inn Hand, Dalvi: Butterfly Dream, Yuri: Forever Mascot and Glacia: Heavenly Guardian Successor standing animations.",
+      "Added Sylvia: Crimson Lotus, Helena: Sunny Inn Hand, Dalvi: Butterfly Dream, Yuri: Forever Mascot and Glacia: Heavenly Guardian Successor voice lines.",
+      "Added Sylvia: Crimson Lotus, Yuri: Forever Mascot and Glacia: Heavenly Guardian Successor ultimate animations.",
+      "Added Yuri: Forever Mascot fated guest animations.",
+      "As always, if you like my work and want to support me so I can keep working on adding more features and improving the site you can do so by donating in either my Ko-Fi or Patreon <3."
+    ]
+  },
+  {
     "date": "16/07/2026",
     "changes": [
       "Added voices for the characters in JP and KR and a setting to change the language.",

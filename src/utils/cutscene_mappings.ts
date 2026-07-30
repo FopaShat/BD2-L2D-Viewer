@@ -1618,6 +1618,93 @@ const cutsceneComposites: Record<string, CutsceneCompositeEntry> = {
       name: "cut_all",
       composite: ["cut_A", { name: "cut_B", playDuration: 4 }]
     }
+  ],
+  "001092": [
+    {
+      name: "loop_1_all",
+      composite: [["loop_1", { name: "loop_1_sword", layerOrder: -1 }]]
+    },
+    {
+      name: "loop_2_all",
+      composite: [["loop_2", { name: "loop_2_bg", layerOrder: -1 }]]
+    },
+    {
+      name: "cut_A_all",
+      composite: [["cut_A", { name: "cut_A_sword", layerOrder: -1 }]]
+    },
+    {
+      name: "cut_B_all",
+      composite: [[
+        { name: "cut_B", playDuration: 5.5 },
+        { name: "cut_B_snake", layerOrder: -1, playDuration: 5.5 },
+        { name: "cut_B_sword", playDuration: 5.5 },
+        { name: "cut_B_water", layerOrder: -1, playDuration: 5.5 }
+      ]]
+    },
+    {
+      name: "cut_all",
+      composite: ["cut_A_all", "cut_B_all"]
+    }
+  ],
+  "066907": [
+    {
+      name: "loop_all",
+      composite: [[
+        "loop",
+        "loop_dragon",
+        { name: "loop_tail", layerOrder: -1 },
+        "loop_waterdrop"
+      ]]
+    },
+    {
+      name: "cut_A_all",
+      composite: [[
+        { name: "cut_A", playDuration: 4 },
+        { name: "cut_A_dragon", playDuration: 4 },
+        { name: "cut_A_tail", layerOrder: -1, playDuration: 4 },
+        { name: "cut_A_waterdrop", playDuration: 4 }
+      ]]
+    },
+    {
+      name: "cut_B_all",
+      composite: [[
+        { name: "cut_B", playDuration: 3 },
+        { name: "cut_B_slap", playDuration: 3 }
+      ]]
+    },
+    {
+      name: "cut_all",
+      composite: ["cut_A_all", "cut_B_all"]
+    }
+  ],
+  "065193": [
+    {
+      name: "loop_all",
+      composite: [["loop", { name: "loop_Hair_back", layerOrder: -1 }]]
+    },
+    {
+      name: "loop_2_all",
+      composite: [["loop_2", "loop_2_Joystick"]]
+    },
+    {
+      name: "cut_A_all",
+      composite: [[
+        { name: "cut_A", playDuration: 4.5 },
+        { name: "cut_A_AD", playDuration: 4.5 },
+        { name: "cut_A_Hair_back", layerOrder: -1, playDuration: 4.5 }
+      ]]
+    },
+    {
+      name: "cut_B_all",
+      composite: [[
+        { name: "cut_B", playDuration: 6 },
+        { name: "cut_B_Joystick", playDuration: 6 }
+      ]]
+    },
+    {
+      name: "cut_all",
+      composite: ["cut_A_all", "cut_B_all"]
+    }
   ]
 }
 

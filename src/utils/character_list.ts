@@ -734,6 +734,14 @@ export default {
     "datingUsesTracks": true,
     "audio": "Char001006_BattleReady"
   },
+  "001092": {
+    "charName": "Sylvia",
+    "costumeName": "Crimson Lotus",
+    "spine": "char001092",
+    "cutscene": "cutscene_char001092",
+    "dating": "",
+    "audio": "Char001092_BattleReady"
+  },
   "001101": {
     "charName": "Teresse",
     "costumeName": "Angel of Destruction",
@@ -1328,6 +1336,14 @@ export default {
     "dating": "",
     "audio": "Char061002_BattleReady"
   },
+  "061003": {
+    "charName": "Helena",
+    "costumeName": "Sunny Inn Hand",
+    "spine": "char061003",
+    "cutscene": "",
+    "dating": "",
+    "audio": "Char061003_BattleReady"
+  },
   "061092": {
     "charName": "Helena",
     "costumeName": "Rising Star",
@@ -1383,6 +1399,14 @@ export default {
     "cutscene": "cutscene_char061306",
     "dating": "",
     "audio": "Char061306_BattleReady"
+  },
+  "061392": {
+    "charName": "Dalvi",
+    "costumeName": "Butterfly Dream",
+    "spine": "char061392",
+    "cutscene": "",
+    "dating": "",
+    "audio": "Char061392_BattleReady"
   },
   "061402": {
     "charName": "Zenith",
@@ -1465,6 +1489,15 @@ export default {
     "dating": "",
     "audio": "Char065103_BattleReady"
   },
+  "065193": {
+    "charName": "Yuri",
+    "costumeName": "Forever Mascot",
+    "spine": "char065193",
+    "cutscene": "cutscene_char065193",
+    "dating": "illust_dating21",
+    "datingUsesTracks": true,
+    "audio": "Char065193_BattleReady"
+  },
   "065802": {
     "charName": "Nartas",
     "costumeName": "Anonymous Sage",
@@ -1546,6 +1579,14 @@ export default {
     "cutscene": "cutscene_char066906",
     "dating": "",
     "audio": "Char066906_BattleReady"
+  },
+  "066907": {
+    "charName": "Glacia",
+    "costumeName": "Heavenly Guardian Successor",
+    "spine": "char066907",
+    "cutscene": "cutscene_char066907",
+    "dating": "",
+    "audio": "Char066907_BattleReady"
   },
   "067002": {
     "charName": "Ventana",
