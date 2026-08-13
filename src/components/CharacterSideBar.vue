@@ -29,10 +29,18 @@
       <div
         v-for="char in filteredCharacters"
         :key="char.id"
-        class="flex items-center py-2 cursor-pointer"
+        class="relative flex items-center py-2 cursor-pointer overflow-hidden rounded"
         :class="{ 'bg-gray-700': char.id === store.selectedCharacterId }"
         @click="select(char.id)"
       >
+        <span
+          v-if="char.displayMode"
+          class="pointer-events-none absolute -left-7 top-2.5 z-10 w-24 -rotate-45 py-0.5 text-center text-[10px] font-black tracking-wider text-white shadow-md shadow-black/40"
+          :class="char.displayMode === 'updated' ? 'bg-amber-500' : 'bg-emerald-500'"
+          :aria-label="char.displayMode === 'updated' ? 'Updated character' : 'New character'"
+        >
+          {{ char.displayMode === 'updated' ? 'UPDATED' : 'NEW' }}
+        </span>
         <img
           :src="icons[char.icon] || icons['unknown']"
           :alt="char.costumeName"
@@ -160,18 +168,25 @@ const hasActiveFilters = computed(
 )
 
 const filteredCharacters = computed(() =>
-  store.characters.filter((c) => {
-    const query = filter.value.trim().toLowerCase()
-    const matchesSearch = !query || (c.charName + ' ' + c.costumeName).toLowerCase().includes(query)
-    const matchesFatedGuest = !showFatedGuestOnly.value || !!c.dating
-    const matchesUltimate = !showUltimateOnly.value || !!c.cutscene
-    const isNpc = c.charName.includes('(Npc)')
-    const matchesCharacterType =
-      characterTypeFilter.value === 'all' ||
-      (characterTypeFilter.value === 'npc' && isNpc) ||
-      (characterTypeFilter.value === 'playable' && !isNpc)
-    return matchesSearch && matchesFatedGuest && matchesUltimate && matchesCharacterType
-  })
+  store.characters
+    .map((character, index) => ({ character, index }))
+    .filter(({ character: c }) => {
+      const query = filter.value.trim().toLowerCase()
+      const matchesSearch = !query || (c.charName + ' ' + c.costumeName).toLowerCase().includes(query)
+      const matchesFatedGuest = !showFatedGuestOnly.value || !!c.dating
+      const matchesUltimate = !showUltimateOnly.value || !!c.cutscene
+      const isNpc = c.charName.includes('(Npc)')
+      const matchesCharacterType =
+        characterTypeFilter.value === 'all' ||
+        (characterTypeFilter.value === 'npc' && isNpc) ||
+        (characterTypeFilter.value === 'playable' && !isNpc)
+      return matchesSearch && matchesFatedGuest && matchesUltimate && matchesCharacterType
+    })
+    .sort(
+      (a, b) =>
+        Number(!!b.character.displayMode) - Number(!!a.character.displayMode) || a.index - b.index,
+    )
+    .map(({ character }) => character)
 )
 
 function select(id: string) {

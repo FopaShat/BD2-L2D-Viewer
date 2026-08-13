@@ -1340,9 +1340,10 @@ export default {
     "charName": "Helena",
     "costumeName": "Sunny Inn Hand",
     "spine": "char061003",
-    "cutscene": "",
+    "cutscene": "cutscene_char061003",
     "dating": "",
-    "audio": "Char061003_BattleReady"
+    "audio": "Char061003_BattleReady",
+    "displayMode": "new"
   },
   "061092": {
     "charName": "Helena",
@@ -1381,8 +1382,10 @@ export default {
     "costumeName": "Bright Moon",
     "spine": "char061302",
     "cutscene": "cutscene_char061302",
-    "dating": "",
-    "audio": "Char061302_BattleReady"
+    "dating": "illust_dating20",
+    "datingUsesTracks": true,
+    "audio": "Char061302_BattleReady",
+    "displayMode": "new"
   },
   "061305": {
     "charName": "Dalvi",
@@ -1404,9 +1407,10 @@ export default {
     "charName": "Dalvi",
     "costumeName": "Butterfly Dream",
     "spine": "char061392",
-    "cutscene": "",
+    "cutscene": "cutscene_char061392",
     "dating": "",
-    "audio": "Char061392_BattleReady"
+    "audio": "Char061392_BattleReady",
+    "displayMode": "new"
   },
   "061402": {
     "charName": "Zenith",
@@ -1586,7 +1590,8 @@ export default {
     "spine": "char066907",
     "cutscene": "cutscene_char066907",
     "dating": "",
-    "audio": "Char066907_BattleReady"
+    "audio": "Char066907_BattleReady",
+    "displayMode": "updated"
   },
   "067002": {
     "charName": "Ventana",
@@ -1822,6 +1827,7 @@ export default {
   cutscene: string,
   dating: string,
   icon?: string,
+  displayMode?: 'new' | 'updated',
   datingUsesTracks?: boolean,
   audio: string
 } }

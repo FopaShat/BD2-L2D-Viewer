@@ -1,5 +1,15 @@
 export default [
   {
+    "date": "13/08/2026",
+    "changes": [
+      "Updated Glacia: Heavenly Guardian Successor ultimate animation.",
+      "Added Helena: Sunny Inn Hand and Dalvi: Butterfly Dream ultimate animations.",
+      "Added Dalvi: Bright Moon fated guest animations.",
+      "Display new or updated animations in the top of the character list with a ribbon",
+      "As always, if you like my work and want to support me so I can keep working on adding more features and improving the site you can do so by donating in either my Ko-Fi or Patreon <3."
+    ]
+  },
+  {
     "date": "30/07/2026",
     "changes": [
       "Added Sylvia: Crimson Lotus, Helena: Sunny Inn Hand, Dalvi: Butterfly Dream, Yuri: Forever Mascot and Glacia: Heavenly Guardian Successor character icons.",

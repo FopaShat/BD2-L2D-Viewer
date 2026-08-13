@@ -1705,6 +1705,46 @@ const cutsceneComposites: Record<string, CutsceneCompositeEntry> = {
       name: "cut_all",
       composite: ["cut_A_all", "cut_B_all"]
     }
+  ],
+  "061003": [
+    {
+      name: "cut_all",
+      composite: [
+        { name: "cut_A", playDuration: 4 },
+        { name: "cut_B", playDuration: 2.2 },
+        { name: "cut_C", playDuration: 2 }
+      ]
+    }
+  ],
+  "061392": [
+    {
+      name: "loop_1_all",
+      composite: [["loop_1", { name: "lamp", layerOrder: -1, loop: true }]]
+    },
+    {
+      name: "loop_2_all",
+      composite: [["loop_2", "loop_2_skirt", "loop_2_fire"]]
+    },
+    {
+      name: "cut_A_all",
+      composite: [[
+        "cut_A",
+        { name: "lamp", layerOrder: -1, loop: true },
+        { name: "cut_trans", playDuration: 3.1 }
+      ]]
+    },
+    {
+      name: "cut_B_all",
+      composite: [[
+        { name: "cut_B", playDuration: 5 },
+        { name: "cut_B_skirt", playDuration: 5 },
+        { name: "cut_B_fire", playDuration: 5 }
+      ]]
+    },
+    {
+      name: "cut_all",
+      composite: ["cut_A_all", "cut_B_all"]
+    }
   ]
 }
 

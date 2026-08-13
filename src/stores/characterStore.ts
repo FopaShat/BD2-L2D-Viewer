@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import character_list from '@/utils/character_list'
 
 type AnimationCategory = 'character' | 'ultimate' | 'dating'
+export type CharacterDisplayMode = 'new' | 'updated'
 export interface Character {
   id: string
   charName: string
@@ -11,6 +12,7 @@ export interface Character {
   dating: string
   audio: string
   icon: string,
+  displayMode?: CharacterDisplayMode,
   datingUsesTracks?: boolean,
   customFiles?: {
     skel?: string,
